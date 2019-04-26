@@ -14,7 +14,8 @@ var rootCmd = &cobra.Command{
 Data-Intensive Applications by Martin Kleppmann.`,
 }
 
-// Execute ...
+// Execute evaluates the command line arguments and maps them to
+// commands and relevant flags.
 func Execute() {
 	rootCmd.AddCommand(runCmd)
 

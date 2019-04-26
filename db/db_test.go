@@ -1,21 +1,25 @@
-package db_test
+package db
 
 import (
 	"os"
 	"testing"
 
 	"github.com/spf13/viper"
-	"github.com/kineticdial/pbdb/db"
 )
+
+func init() {
+	viper.SetDefault("data", "./data")
+	Initialize()
+}
 
 func TestSetGet(t *testing.T) {
 	b := []byte("foo")
-	err := db.Set("1", b)
+	err := Set("1", b)
 	if err != nil {
 		t.Fatalf("%s", err)
 	}
 
-	bPrime, err := db.Get("1")
+	bPrime, err := Get("1")
 	if err != nil {
 		t.Fatalf("%s", err)
 	}
@@ -23,12 +27,10 @@ func TestSetGet(t *testing.T) {
 	if string(b) != string(bPrime) {
 		t.Fatalf("%s does not eq %s", b, bPrime)
 	}
-
-	os.Remove(viper.GetString("dbFilePath"))
 }
 
 func TestBuildIndices(t *testing.T) {
-	f, err := os.Create(viper.GetString("dbFilePath"))
+	f, err := os.Create(viper.GetString("data"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -41,14 +43,14 @@ func TestBuildIndices(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	db.BuildIndices()
+	buildIndices()
 
-	foo, _ := db.Get("foo")
+	foo, _ := Get("foo")
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	baz, _ := db.Get("baz")
+	baz, _ := Get("baz")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -60,6 +62,4 @@ func TestBuildIndices(t *testing.T) {
 	if string(baz) != "qux" {
 		t.Fatalf("%s does not eq qux", baz)
 	}
-
-	os.Remove(viper.GetString("dbFilePath"))
 }

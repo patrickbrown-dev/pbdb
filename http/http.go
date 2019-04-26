@@ -1,3 +1,4 @@
+// Package http provides the http porcelain to the pbdb database.
 package http
 
 import (
@@ -6,8 +7,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/spf13/viper"
 	"github.com/kineticdial/pbdb/db"
+	"github.com/spf13/viper"
 )
 
 func getHandler(w http.ResponseWriter, r *http.Request) {
@@ -52,7 +53,7 @@ func setHandler(w http.ResponseWriter, r *http.Request) {
 	created(w, r)
 }
 
-// Serve ...
+// Serve sets up the http server for the database.
 func Serve() {
 	http.HandleFunc("/get/", getHandler)
 	http.HandleFunc("/set/", setHandler)

@@ -1,3 +1,6 @@
+// Package db provides low-level database operations with a simple
+// "Get" and "Set" API. It is important to note that the database
+// must be initialized (with the method Initialize) before use.
 package db
 
 import (
@@ -18,6 +21,8 @@ type writeData struct {
 var hashIndex map[string]writeData
 var dbFilePath string
 
+// Initialize creates the data file if it does not exist, and then
+// builds an in-memory hash index from the data file.
 func Initialize() {
 	dbFilePath = viper.GetString("data")
 
@@ -34,11 +39,10 @@ func Initialize() {
 
 	log.Println("Initializing indices")
 
-	BuildIndices()
+	buildIndices()
 }
 
-// BuildIndices ...
-func BuildIndices() {
+func buildIndices() {
 	hashIndex = make(map[string]writeData)
 	f, err := os.Open(dbFilePath)
 	if err != nil {
@@ -62,7 +66,9 @@ func BuildIndices() {
 	}
 }
 
-// Set ...
+// Set stores a value at a given key. Under the hood, Set is simply
+// appending to tha datafile and never actually writes over any old
+// data.
 func Set(k string, v []byte) error {
 	f, err := os.OpenFile(dbFilePath, os.O_APPEND|os.O_WRONLY, 0600)
 	if err != nil {
@@ -89,7 +95,8 @@ func Set(k string, v []byte) error {
 	return nil
 }
 
-// Get ...
+// Get retrieves a value by a given key, taking advantage of the hash
+// index to provide constant time lookups.
 func Get(k string) ([]byte, error) {
 	f, err := os.OpenFile(dbFilePath, os.O_RDONLY, 0600)
 	if err != nil {
