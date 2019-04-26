@@ -8,9 +8,9 @@ import (
 	"github.com/kineticdial/pbdb/db"
 )
 
-func TestPutGet(t *testing.T) {
+func TestSetGet(t *testing.T) {
 	b := []byte("foo")
-	err := db.Put("1", b)
+	err := db.Set("1", b)
 	if err != nil {
 		t.Fatalf("%s", err)
 	}

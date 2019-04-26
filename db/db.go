@@ -62,8 +62,8 @@ func BuildIndices() {
 	}
 }
 
-// Put ...
-func Put(k string, v []byte) error {
+// Set ...
+func Set(k string, v []byte) error {
 	f, err := os.OpenFile(dbFilePath, os.O_APPEND|os.O_WRONLY, 0600)
 	if err != nil {
 		return err

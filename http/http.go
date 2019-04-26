@@ -28,13 +28,13 @@ func getHandler(w http.ResponseWriter, r *http.Request) {
 	ok(w, r)
 }
 
-func putHandler(w http.ResponseWriter, r *http.Request) {
+func setHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		unprocessableEntity(w, r)
 		return
 	}
 
-	k := r.URL.Path[len("/put/"):]
+	k := r.URL.Path[len("/set/"):]
 	b, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		log.Printf("Err: %s", err)
@@ -42,7 +42,7 @@ func putHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = db.Put(k, b)
+	err = db.Set(k, b)
 	if err != nil {
 		log.Printf("Err: %s", err)
 		internalServerError(w, r)
@@ -55,7 +55,7 @@ func putHandler(w http.ResponseWriter, r *http.Request) {
 // Serve ...
 func Serve() {
 	http.HandleFunc("/get/", getHandler)
-	http.HandleFunc("/put/", putHandler)
+	http.HandleFunc("/set/", setHandler)
 	port := fmt.Sprintf(":%s", viper.GetString("port"))
 	log.Printf("Starting pbdb server on port %s\n", port)
 	log.Fatal(http.ListenAndServe(port, nil))
