@@ -102,6 +102,7 @@ func Get(k string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer f.Close()
 
 	wd := hashIndex[k]
 
