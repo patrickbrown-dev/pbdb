@@ -26,7 +26,13 @@ $ curl localhost:1728/get/foo
 bar$
 ```
 
-_There's no authentication_, you have been warned.
+## Caveats
+
+You'll have a bad time if you put commas in your keys.
+
+You'll also have a bad time if your values have new line characters.
+
+Finally, _there's no authentication_. You have been warned.
 
 ## Works Cited
 
