@@ -9,10 +9,17 @@ import (
 
 func init() {
 	viper.SetDefault("data", "./data")
-	Initialize()
+}
+
+func teardown() {
+	d := viper.GetString("data")
+	os.Remove(d)
 }
 
 func TestSetGet(t *testing.T) {
+	Initialize()
+	defer teardown()
+
 	b := []byte("foo")
 	err := Set("1", b)
 	if err != nil {
@@ -25,7 +32,27 @@ func TestSetGet(t *testing.T) {
 	}
 
 	if string(b) != string(bPrime) {
-		t.Fatalf("%s does not eq %s", b, bPrime)
+		t.Fatalf("'%s' does not eq '%s'", b, bPrime)
+	}
+}
+
+func TestMultilineString(t *testing.T) {
+	Initialize()
+	defer teardown()
+
+	b := []byte("this is\na test")
+	err := Set("1", b)
+	if err != nil {
+		t.Fatalf("%s", err)
+	}
+
+	bPrime, err := Get("1")
+	if err != nil {
+		t.Fatalf("%s", err)
+	}
+
+	if string(b) != string(bPrime) {
+		t.Fatalf("'%s' does not eq '%s'", b, bPrime)
 	}
 }
 
@@ -36,14 +63,15 @@ func TestBuildIndices(t *testing.T) {
 	}
 	defer f.Close()
 
-	s := "foo,bar\nbaz,qux\n"
+	s := "Zm9vLGJhcgo=\nYmF6LHF1eAo=\n"
 
 	_, err = f.WriteString(s)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	buildIndices()
+	Initialize()
+	defer teardown()
 
 	foo, _ := Get("foo")
 	if err != nil {
@@ -56,10 +84,10 @@ func TestBuildIndices(t *testing.T) {
 	}
 
 	if string(foo) != "bar" {
-		t.Fatalf("%s does not eq bar", foo)
+		t.Fatalf("'%s' does not eq 'bar'", foo)
 	}
 
 	if string(baz) != "qux" {
-		t.Fatalf("%s does not eq qux", baz)
+		t.Fatalf("'%s' does not eq 'qux'", baz)
 	}
 }
