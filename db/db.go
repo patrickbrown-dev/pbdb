@@ -70,6 +70,11 @@ func buildIndices() {
 // appending to tha datafile and never actually writes over any old
 // data.
 func Set(k string, v []byte) error {
+	err := validateKey(k)
+	if err != nil {
+		return err
+	}
+
 	f, err := os.OpenFile(dbFilePath, os.O_APPEND|os.O_WRONLY, 0600)
 	if err != nil {
 		return err
@@ -98,6 +103,11 @@ func Set(k string, v []byte) error {
 // Get retrieves a value by a given key, taking advantage of the hash
 // index to provide constant time lookups.
 func Get(k string) ([]byte, error) {
+	err := validateKey(k)
+	if err != nil {
+		return nil, err
+	}
+
 	f, err := os.OpenFile(dbFilePath, os.O_RDONLY, 0600)
 	if err != nil {
 		return nil, err
@@ -115,9 +125,8 @@ func Get(k string) ([]byte, error) {
 
 	// Trim key, comma, and new line chars
 	s := string(b)
-	s = strings.TrimLeft(s, k)
-	s = strings.TrimLeft(s, ",")
-	s = strings.TrimRight(s, "\n")
+	s = strings.TrimPrefix(s, k+",")
+	s = strings.TrimSuffix(s, "\n")
 
 	return []byte(s), nil
 }
