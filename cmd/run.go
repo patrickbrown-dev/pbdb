@@ -1,10 +1,10 @@
 package cmd
 
 import (
+	"github.com/p16n/pbdb/db"
+	"github.com/p16n/pbdb/http"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/kineticdial/pbdb/db"
-	"github.com/kineticdial/pbdb/http"
 )
 
 var runCmd = &cobra.Command{

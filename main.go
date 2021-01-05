@@ -14,7 +14,7 @@
 package main
 
 import (
-	"github.com/kineticdial/pbdb/cmd"
+	"github.com/p16n/pbdb/cmd"
 )
 
 func main() {
