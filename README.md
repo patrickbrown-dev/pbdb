@@ -1,6 +1,6 @@
 # pbdb
 
-[![GoDoc](https://godoc.org/github.com/p16n/pbdb?status.svg)](https://godoc.org/github.com/p16n/pbdb)
+[![Go Reference](https://pkg.go.dev/badge/github.com/p16n/pbdb.svg)](https://pkg.go.dev/github.com/p16n/pbdb)
 
 ## Description
 
