@@ -72,7 +72,7 @@ func buildIndices() {
 }
 
 // Set stores a value at a given key. Under the hood, Set is simply
-// appending to tha datafile and never actually writes over any old
+// appending to the datafile and never actually writes over any old
 // data.
 func Set(k string, v []byte) error {
 	err := validateKey(k)
@@ -95,8 +95,8 @@ func Set(k string, v []byte) error {
 	s := fmt.Sprintf("%s,%s", k, v)
 	s = base64.StdEncoding.EncodeToString([]byte(s)) + "\n"
 
-	// Write data to file
-	l, err := f.WriteAt([]byte(s), o)
+	// Write (i.e. append) data to file
+	l, err := f.Write([]byte(s))
 	if err != nil {
 		return err
 	}
