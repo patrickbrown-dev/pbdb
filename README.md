@@ -1,6 +1,6 @@
 # pbdb
 
-[![GoDoc](https://godoc.org/github.com/kineticdial/pbdb?status.svg)](https://godoc.org/github.com/kineticdial/pbdb)
+[![GoDoc](https://godoc.org/github.com/p16n/pbdb?status.svg)](https://godoc.org/github.com/p16n/pbdb)
 
 ## Description
 

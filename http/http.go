@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/kineticdial/pbdb/db"
+	"github.com/p16n/pbdb/db"
 	"github.com/spf13/viper"
 )
 
