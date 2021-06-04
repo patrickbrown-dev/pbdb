@@ -5,7 +5,6 @@ package db
 
 import (
 	"bufio"
-	"encoding/base64"
 	"fmt"
 	"log"
 	"os"
@@ -56,11 +55,7 @@ func buildIndices() {
 
 	for scanner.Scan() {
 		b := scanner.Bytes()
-		bytes, err := base64.StdEncoding.DecodeString(string(b))
-		if err != nil {
-			log.Fatal(err)
-		}
-		k := strings.SplitN(string(bytes), ",", 2)[0]
+		k := strings.SplitN(string(b), ",", 2)[0]
 		l := len(b) + len([]byte("\n"))
 		hashIndex[k] = writeData{o, l}
 		o += int64(l)
@@ -92,8 +87,7 @@ func Set(k string, v []byte) error {
 		return err
 	}
 
-	s := fmt.Sprintf("%s,%s", k, v)
-	s = base64.StdEncoding.EncodeToString([]byte(s)) + "\n"
+	s := fmt.Sprintf("%s,%s\n", k, v)
 
 	// Write (i.e. append) data to file
 	l, err := f.Write([]byte(s))
@@ -131,11 +125,7 @@ func Get(k string) ([]byte, error) {
 	}
 
 	// Trim key, comma, and new line chars
-	bytes, err := base64.StdEncoding.DecodeString(string(b))
-	if err != nil {
-		return nil, err
-	}
-	s := string(bytes)
+	s := string(b)
 	s = strings.TrimPrefix(s, k+",")
 	s = strings.TrimSuffix(s, "\n")
 

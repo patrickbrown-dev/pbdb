@@ -37,11 +37,15 @@ bar$
 
 ## Caveats
 
-~~You'll have a bad time if you put commas in your keys.~~ Now fixed by key
-validation.
+~~You'll have a bad time if you put commas in your keys.~~
 
-~~You'll also have a bad time if your values have new line characters.~~ I get
-around this by base64 encoding the row, which I'm not a huge fan of (more data).
+Now fixed by key validation.
+
+You'll also have a bad time if your values have new line characters.
+
+~~I get around this by base64 encoding the row, which I'm not a huge fan of (more data).~~
+
+This was a bad idea as base64 encoding is O(n) which undermines performance.
 
 Finally, _there's no authentication_. You have been warned.
 
