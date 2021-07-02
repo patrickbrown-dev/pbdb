@@ -63,7 +63,7 @@ func TestBuildIndices(t *testing.T) {
 	}
 	defer f.Close()
 
-	s := "Zm9vLGJhcgo=\nYmF6LHF1eAo=\n"
+	s := "foo,bar\nbaz,qux\n"
 
 	_, err = f.WriteString(s)
 	if err != nil {
