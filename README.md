@@ -1,4 +1,4 @@
-# [pbdb][1]
+# pbdb
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/p16n/pbdb.svg)](https://pkg.go.dev/github.com/p16n/pbdb)
 
@@ -60,6 +60,3 @@ bar$
 
 Kleppmann, Martin. Designing Data-Intensive Applications (Kindle Locations
 1934-1937). O'Reilly Media. Kindle Edition.
-
-
-[1]: https://github.com/p16n/pbdb
