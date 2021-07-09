@@ -1,13 +1,13 @@
-FROM golang:1.12-alpine
+FROM golang:1.16-alpine
 
-WORKDIR /go/src/pbdb
+WORKDIR /pbdb
 COPY . .
 
-RUN apk add dep git
-RUN dep ensure
+RUN apk add git
+RUN go build -v ./...
 RUN go install -v ./...
 RUN mkdir -p /etc/pbdb/
 
 EXPOSE 1728:1728
 
-CMD [ "pbdb", "run"]
+CMD ["pbdb", "run"]
