@@ -1,4 +1,4 @@
-# pbdb
+# [pbdb][1]
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/p16n/pbdb.svg)](https://pkg.go.dev/github.com/p16n/pbdb)
 
@@ -15,6 +15,22 @@ Applications by Martin Kleppmann.
 > to find the latest value [...] (Kleppmann 2017)
 
 It also uses a hash index (like Kleppmann later suggests) to speed up reads.
+
+## Installation
+
+**Option A:** Build and run the provided `Dockerfile`
+
+```
+docker build -t pbdb:latest .
+docker run -p 1728:1728/tcp pbdb:latest
+```
+
+**Option B:** Compile and run the source code
+
+```
+go build
+./pbdb run -d dbfile
+```
 
 ## Usage
 
@@ -44,3 +60,6 @@ bar$
 
 Kleppmann, Martin. Designing Data-Intensive Applications (Kindle Locations
 1934-1937). O'Reilly Media. Kindle Edition.
+
+
+[1]: https://github.com/p16n/pbdb
