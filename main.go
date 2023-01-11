@@ -14,7 +14,7 @@
 package main
 
 import (
-	"github.com/p16n/pbdb/cmd"
+	"github.com/patrickbrown-dev/pbdb/cmd"
 )
 
 func main() {

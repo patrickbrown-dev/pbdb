@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/p16n/pbdb/db"
+	"github.com/patrickbrown-dev/pbdb/db"
 	"github.com/spf13/viper"
 )
 

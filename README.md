@@ -1,6 +1,6 @@
 # pbdb
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/p16n/pbdb.svg)](https://pkg.go.dev/github.com/p16n/pbdb)
+[![Go Reference](https://pkg.go.dev/badge/github.com/patrickbrown-dev/pbdb.svg)](https://pkg.go.dev/github.com/patrickbrown-dev/pbdb)
 
 ## Description
 

@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"github.com/p16n/pbdb/db"
-	"github.com/p16n/pbdb/http"
+	"github.com/patrickbrown-dev/pbdb/db"
+	"github.com/patrickbrown-dev/pbdb/http"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
